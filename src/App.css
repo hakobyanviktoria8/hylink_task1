@@ -1,3 +1,8 @@
+h2 {
+  text-align: center;
+  margin-top: 200px;
+}
+
 .App table {
   border-collapse: collapse;
   border: 1px solid rgb(186, 186, 186);
@@ -37,3 +42,25 @@
   margin: 0 auto;
   min-width: 600px;
  }
+
+ /* pagination */
+ .App ul {
+  margin: 20px auto;
+  display: flex;
+  list-style: none;
+  outline: none;
+  justify-content: center;
+}
+
+.App .selected a{
+  background-color: rgb(143 143 143);
+  border-color: rgb(143 143 143);
+  color: #fff;
+}
+
+.App li a{
+  border: 1px solid rgb(238, 238, 238);
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
