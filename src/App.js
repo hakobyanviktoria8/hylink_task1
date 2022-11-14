@@ -1,14 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import User from './util/components/User';
+import { fetchData } from './util/helpers/fetchData';
 
 function App() {
-  const [showMore, setShowMore] = useState(false);
+  const [users, setUsers] = useState(null);
   
-  const handleClick = () => {
-    setShowMore(!showMore)
-  }
-
+  useEffect(()=> {
+    fetchData("https://api.github.com/users", setUsers)
+  },[])
+  
   return (
     <div className="App">
       <table>
@@ -21,38 +22,9 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
-            <td><button onClick={handleClick}>btn</button></td>
-          </tr>
-          {showMore && 
-           <tr>
-            <td colspan="4">
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Company</th>
-                  <th>Location</th>
-                  <th>Repositories</th>
-                  <th>Followers</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Alfreds Futterkiste</td>
-                  <td>Maria Anders</td>
-                  <td>Germany</td>
-                  <td>btn</td>
-                  <td>wqw</td>
-                </tr>
-              </tbody>
-            </table>
-            </td>
-          </tr>
-          }
+          {users?.map(user => 
+            <User user={user}/>
+          )}
         </tbody>
       </table>
     </div>

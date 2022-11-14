@@ -1,7 +1,39 @@
 .App table {
   border-collapse: collapse;
   border: 1px solid rgb(186, 186, 186);
+  max-width: 800px;
+  min-width: 640px;
+  margin: 20px auto;
 }
+
 .App table thead {
   background: rgb(238, 238, 238);
 }
+
+.App th {
+  padding: 10px;
+}
+
+.App tr {
+  border-bottom: 1px solid rgb(238, 238, 238);
+}
+
+.App td {
+  padding: 10px 10px;
+  text-align: center;
+}
+
+.App img{
+  width: 80px;
+  height: 80px;
+}
+
+ .App button {
+    width: 100px;
+    height: 34px;
+ }
+
+ .App table table {
+  margin: 0 auto;
+  min-width: 600px;
+ }
