@@ -3,21 +3,38 @@ import { useEffect, useState } from 'react';
 import User from './util/components/User';
 import { fetchData } from './util/helpers/fetchData';
 import ReactPaginate from 'react-paginate';
+import LoadingData from './util/components/LoadingData';
 
 function App() {
   const [users, setUsers] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);  
   // if we want can change per page users count 20 
   const usersPerPage = 10;
   const [perPageUsersCount, setPerPageUsersCount] = useState(0);
+  const [searchValue, setSearchValue] = useState('');
+  const[currentUsersDataSort, setCurrentUsersDataSort] = useState(null);
+
   const endUsersCount = perPageUsersCount + usersPerPage;
   const currentUsersData = users?.slice(perPageUsersCount, endUsersCount);
-  const pageCount = Math.ceil(users?.length / usersPerPage);
-  
+  const pageCount = !searchValue ? 
+    Math.ceil(users?.length / usersPerPage)
+    :
+    Math.ceil(currentUsersData?.length / usersPerPage)
+
   useEffect(()=> {
     fetchData("https://api.github.com/users", setUsers)
-    setIsLoading(true)
+    setTimeout(()=>{
+      setIsLoading(true)
+    }, 500)
   },[])
+
+  const handleChange = (e) => {
+    setSearchValue(e.target.value)
+  }
+
+  useEffect(() => {
+    setCurrentUsersDataSort(users?.filter(user => user.login.includes(searchValue)))
+  }, [searchValue])
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * usersPerPage) % users.length;
@@ -25,10 +42,15 @@ function App() {
   };  
   
   return (
-    !isLoading ? 
-      <h2>Loading...</h2>
-      : 
+    <LoadingData isLoading={isLoading}>
       <div className="App">
+        <input 
+          type="search" 
+          value={searchValue}
+          placeholder="Search user..." 
+          onChange={handleChange}
+        />
+
         <table>
           <thead>
             <tr>
@@ -39,8 +61,8 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {currentUsersData?.map(user => 
-              <User user={user}/>
+            {(searchValue ? currentUsersDataSort : currentUsersData)?.map(user => 
+                <User user={user}/>
             )}
           </tbody>
         </table>
@@ -55,6 +77,7 @@ function App() {
           renderOnZeroPageCount={null}
         />
       </div>
+    </LoadingData>
   );
 }
 
