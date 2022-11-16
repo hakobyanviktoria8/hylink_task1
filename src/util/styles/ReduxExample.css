@@ -1,0 +1,12 @@
+.ReduxExampl {
+    margin: 20px auto;
+    width: 300px;
+    text-align: center;
+    border: 1px solid rgb(238, 238, 238);
+}
+
+.ReduxExampl button {
+    width: 100px;
+    height: 30px;
+    margin: 10px;
+}

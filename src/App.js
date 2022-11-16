@@ -1,14 +1,14 @@
-import './App.css';
+import './util/styles/App.css';
 import { useEffect, useState } from 'react';
 import User from './util/components/User';
 import { fetchData } from './util/helpers/fetchData';
 import ReactPaginate from 'react-paginate';
 import LoadingData from './util/components/LoadingData';
+import ReduxExampl from './util/components/ReduxExampl';
 
 function App() {
   const [users, setUsers] = useState(null);
   const [isLoading, setIsLoading] = useState(false);  
-  // if we want can change per page users count 20 
   const usersPerPage = 10;
   const [perPageUsersCount, setPerPageUsersCount] = useState(0);
   const [searchValue, setSearchValue] = useState('');
@@ -43,6 +43,8 @@ function App() {
   
   return (
     <LoadingData isLoading={isLoading}>
+      <ReduxExampl />
+      
       <div className="App">
         <input 
           type="search" 
@@ -62,7 +64,7 @@ function App() {
           </thead>
           <tbody>
             {(searchValue ? currentUsersDataSort : currentUsersData)?.map(user => 
-                <User user={user}/>
+                <User user={user} key={user.id}/>
             )}
           </tbody>
         </table>
