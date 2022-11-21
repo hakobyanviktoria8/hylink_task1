@@ -5,6 +5,7 @@ import { fetchData } from './util/helpers/fetchData';
 import ReactPaginate from 'react-paginate';
 import LoadingData from './util/components/LoadingData';
 import ReduxExampl from './util/components/ReduxExampl';
+import GetUserData from './util/components/GetUserData';
 
 function App() {
   const [users, setUsers] = useState(null);
@@ -43,7 +44,8 @@ function App() {
   
   return (
     <LoadingData isLoading={isLoading}>
-      <ReduxExampl />
+      {/* <ReduxExampl /> */}
+      <GetUserData />
       
       <div className="App">
         <input 
