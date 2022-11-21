@@ -6,6 +6,7 @@ import ReactPaginate from 'react-paginate';
 import LoadingData from './util/components/LoadingData';
 import ReduxExampl from './util/components/ReduxExampl';
 import GetUserData from './util/components/GetUserData';
+import Calculator from './util/components/Calculator';
 
 function App() {
   const [users, setUsers] = useState(null);
@@ -46,7 +47,9 @@ function App() {
     <LoadingData isLoading={isLoading}>
       {/* <ReduxExampl /> */}
       <GetUserData />
-      
+      <hr />
+      <Calculator />
+      <hr />
       <div className="App">
         <input 
           type="search" 
